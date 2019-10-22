@@ -144,7 +144,7 @@ function ButtonClickEffct(id, event) {
                 break;
             case -1:
                 ClickBomb(id);
-                break;
+                return
             default:
                 NormalClick(id);
                 break;
