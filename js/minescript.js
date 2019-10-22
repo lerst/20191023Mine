@@ -144,12 +144,14 @@ function ButtonClickEffct(id, event) {
                 break;
             case -1:
                 ClickBomb(id);
-                return
+                break;
             default:
                 NormalClick(id);
                 break;
         }
-        CheckWin();
+        if(map[id]!=-1){
+            CheckWin();
+        }
     }
 
 }
