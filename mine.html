@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--使用https-->
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>踩地雷</title>
+    <link rel="icon" href="img/mine.png" type="image/png" sizes="16x16">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="css/minecss.css">
+
+</head>
+
+<body onContextMenu="window.event.returnValue=false">
+     
+    <audio src="voice/bgm.mp3" loop type="audio/mp3" id="bgmusic"></audio>
+    <audio src="voice/clickSound.mp3" id="clickSound"></audio>
+    <audio src="voice/bombSound.mp3" id="bombSound"></audio>
+    <audio src="voice/spaceSound.mp3" id="spaceSound"></audio>
+    <audio src="voice/reSound.mp3" id="reSound"></audio>
+    <audio src="voice/win.mp3" id="winSound"></audio>
+    
+    <div id="headerTitle" style="text-align: center">
+        <h1>Minesweeper</h1>
+    </div>
+    <div id="whole">
+        <table id="headSide">
+            <tr>
+                <td><span id="flagText">000</span></td>
+                <td><button id="startIconButton" onclick="restart()"><i class="far fa-meh fa-2x" style="color:rgba(255, 255, 0, 0.801)"></i></td>
+                <td><span id="timeText">000</span></td>
+            </tr>
+        </table>
+        <div id="gameZone"></div>
+    </div>
+
+
+
+    <div class="modal" id="setModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-scrollable" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalScrollableTitle"> <b>設定</b></h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                        <div id="textLeft">
+                                <p>寬度不可大於20 小於8</p>
+                                <p>炸彈不可大於總盤面格子的五分之一</p>
+                                <P>且至少超過五顆</P>
+                            </div>
+                    
+                            <div style="display: inline-table">
+                                <div style="display:table">寬度:</div>
+                                <div style="display:table">炸彈數:</div>
+                            </div>
+                    
+                            <div style="display:inline-table">
+                                <input type=text id="width" style="display:block" value=8>
+                                <input type=text id="bombQuantity" value=10>
+                            </div>
+                    
+                            <button style="position: relative;
+                                           display:block;
+                                           margin-top: 10px;
+                                           margin-bottom: 10px;
+                                           width:100%" onclick="set()">
+                                設定寬度,炸彈並重啟新局
+                            </button>
+                            <hr>
+                            <b style="text-align: center">設定音量</b>
+                            <hr>
+                            <div style="position: relative; text-align: center">
+                                <button class="volumeButton" id="volumeDownButton" onclick="volumeButtonEvent(this.id)"><i class="fas fa-volume-down"></i></button>
+                                <button class="volumeButton" id="volumeMutedButton" onclick="volumeButtonEvent(this.id)"
+                                    ><i class="fas fa-volume-mute"></i></button>
+                                <button class="volumeButton" id="volumeUpButton" onclick="volumeButtonEvent(this.id)"
+                                    ><i class="fas fa-volume-up"></i></button>
+                            </div>
+                            <p>now volume: <b id="volumeVar">20%</b></p>
+                                    </div>
+              </div>
+            </div>
+    </div>
+
+
+
+    <div class="modal" id="helpModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title"><b>遊戲說明</b></h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                        <div id="textLeft">
+                                <ul class="helpul">
+                                    <li>左鍵可以翻開方格</li>
+                                    <li>右鍵可以標示地雷</li>
+                                    <li>左右鍵同時點 將會翻開九宮格內<li style="display:block">可判斷出來的非炸彈格子</li>
+                                    <li>將所有炸彈外的方格翻開即勝利</li>
+                                    <li>盤面數字代表九宮格內炸彈總和</li>
+                                    <li>上方左側數字代表旗幟數量</li>
+                                    <li>右側數字代表經過時間</li>
+                                    <li>中間圖示用以重新開始遊戲</li>
+                                </ul>
+                    </div>
+            </div>
+            </div>
+        </div>
+    </div>
+          
+    <div class="modal" id="canvasModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title"><b>Canvas版玩法</b></h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                        <canvas id="myCanvas" width="500" height="600"></canvas>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div style="text-align: center;margin-top:10px">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#setModal" >
+    Setting
+    </button>
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#helpModal" >
+    Help
+    </button>
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#canvasModal" >
+    Canvas
+    </button>
+            
+        
+    </div>
+
+    <script src="js/minescript.js"></script>
+    <script src="js/canvascript.js"></script>
+
+</body>
+
+
+</html>

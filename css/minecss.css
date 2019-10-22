@@ -1,0 +1,81 @@
+
+body {
+    background-color: cornsilk;
+}
+
+#headerTitle{
+    background-color:rgba(0, 0, 0);;
+    text-align: center;
+    margin:auto;
+    line-height: 1px;
+    color:white;
+    margin-bottom: 3px;
+    padding-bottom: 2px;
+}
+
+
+
+#whole{
+    border:20px ridge brown;
+    position: relative;
+    text-align: center;
+    display:inline-block;
+}
+
+#headSide{
+    position:relative;
+    width:100%;
+    text-align: center;
+    border-bottom: 10px;
+    background-color: coral;
+    border-bottom-color: aqua;
+    border-bottom-style: outset;
+}
+
+#headSide span{
+    background-color: black;
+    border:2px inset white;
+    font-size: 25px;
+    color:red;
+}
+
+#startIconButton{
+    background-size: 100% 100%;
+    background-color:coral;
+   
+}
+li{
+    margin-bottom: 20px;
+    line-height: 10px;
+}
+.ZoneButton {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    font-size: 20px;
+    vertical-align: top;
+}
+#textLeft{
+    text-align: left;
+    line-height: 10px;
+} 
+#setDiv{
+    color:red;
+    vertical-align: top;    
+    text-align: center;
+}
+#helpDiv{
+    color:blue;
+    text-align: center;
+}
+.volumeButton{
+    width:30%;
+    margin-top: 2px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.helpul li{
+    list-style-type:decimal;
+}
