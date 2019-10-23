@@ -128,7 +128,7 @@ function ButtonCreate() {
     }
     else{
         $("#whole").css("left","0");
-        $("#whole").css("display","inlineblock");
+        $("#whole").css("display","block");
         $(".ZoneButton").css("width",(Math.floor($("#whole").width()/mapWidth) - 4) +"px")
     }
 }
