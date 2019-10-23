@@ -3,7 +3,7 @@ body {
     background-color: cornsilk;
 }
 
-@media screen and (max-width:500px) {
+@media screen and (max-width:600px) {
     .ZoneButton {
         width: 25px;
         height: 25px;
