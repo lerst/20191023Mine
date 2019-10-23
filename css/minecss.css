@@ -12,8 +12,7 @@ body {
         vertical-align: top;
     }
     #whole{
-        left:0px;
-
+        left:0px;!important
     }
 }
 
