@@ -129,7 +129,10 @@ function ButtonCreate() {
     else{
         $("#whole").css("left","0");
         $("#whole").css("display","block");
-        $(".ZoneButton").css("width",(Math.floor($("#whole").width()/mapWidth) - 4) +"px")
+        $(".ZoneButton").css("width",(Math.floor($("#whole").width()/mapWidth)) +"px");
+        $(".ZoneButton").css("height",(Math.floor($("#whole").width()/mapWidth)) +"px");
+        $(".ZoneButton").css("background-position","center");
+
     }
 }
 
