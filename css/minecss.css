@@ -3,18 +3,6 @@ body {
     background-color: cornsilk;
 }
 
-@media screen and (max-width:600px) {
-    .ZoneButton {
-        width: 25px;
-        height: 25px;
-        text-align: center;
-        font-size: 10px;
-        vertical-align: top;
-    }
-    #whole{
-        left:0px;!important
-    }
-}
 
 #headerTitle{
     background-color:rgba(0, 0, 0);;
