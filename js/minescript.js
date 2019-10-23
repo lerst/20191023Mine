@@ -123,7 +123,7 @@ function ButtonCreate() {
             $("#gameZone").append("<br>");
         }
     }
-    alert($("body").width());
+    alert("width"+$("body").width());
     if($("body").width()>800){
         $("#whole").css("left",$("body").width()/2-$("#whole").width()/2);
     }
