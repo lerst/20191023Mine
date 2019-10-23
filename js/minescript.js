@@ -123,13 +123,13 @@ function ButtonCreate() {
             $("#gameZone").append("<br>");
         }
     }
-    alert("width"+$("body").width());
     if($("body").width()>800){
         $("#whole").css("left",$("body").width()/2-$("#whole").width()/2);
     }
     else{
         $("#whole").css("left","0");
         $(".ZoneButton").css("width",(Math.floor($("#whole").width()/mapWidth) - 4) +"px")
+        alert("width"+(Math.floor($("#whole").width()/mapWidth) - 4));
     }
 }
 
