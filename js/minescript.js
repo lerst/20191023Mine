@@ -124,11 +124,13 @@ function ButtonCreate() {
         }
     }
     if($("body").width()>800){
-        $("#whole").css("left",$("body").width()/2-$("#whole").width()/2);
+        $("#whole").css("left",$("body").width()/2-$("#whole").width()/2+"px");
     }
     else{
         $("#whole").css("left","0");
         $(".ZoneButton").css("width",(Math.floor($("#whole").width()/mapWidth) - 4) +"px")
+        $(".ZoneButton").css("height",(Math.floor($("#whole").width()/mapWidth) - 4) +"px")
+
     }
 }
 
